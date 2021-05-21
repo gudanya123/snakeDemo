@@ -1,0 +1,38 @@
+<!--pages/snake/snake.wxml-->
+<!-- 贪吃蛇页面 -->
+<!-- 
+  事件:
+      bindtouchstart(手指触摸动作开始)
+      bindtouchmove(手指触摸后移动)
+      bindtouchend(手指触摸动作结束)
+      bindtap(手指触摸后马上离开)
+  本地缓存数据:
+      wx.setStorageSync(string key,any data) (同步请求)
+      wx.getStroageSync(string key) (获取本地缓存数据)
+  弹出框:
+      modal标签和wx.showModal(Object)接口
+ -->
+<view class="control" bindtouchstart="tapStart" bindtouchmove="tapMove" bindtouchend="tapEnd">
+  <view class="score">
+    <view class="title">snake</view>
+    <view class="scoredetail">
+      <view class="scoredesc">得分</view>
+      <view class="scorenumber">{{score}}</view>
+    </view>
+    <view class="scoredetail">
+      <view class="scoredesc">历史最高</view>
+      <view class="scorenumber">{{maxscore}}</view>
+    </view>
+  </view>
+
+  <view class="ground">
+    <view class="rows" wx:for="{{ground}}" wx:for-item="cols">
+      <view wx:for="{{cols}}" class="block block_{{item}}"></view>
+    </view>
+  </view>
+
+  <modal class="modal" hidden="{{modalHidden}}" no-cancel bindconfirm="modalConfirm">
+    <view>游戏结束,需要重新开始吗?</view>
+  </modal>
+</view>
+
